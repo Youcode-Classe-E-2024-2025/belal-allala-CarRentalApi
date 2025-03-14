@@ -152,11 +152,8 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 👤 Auteur
 
-- **Votre Nom** - [GitHub](https://github.com/votre-utilisateur)
+- **Votre Nom** - [GitHub](https://github.com/belal-allala)
 
----
-
-<!-- ## 🙏 Remerciements -->
 
 
 
