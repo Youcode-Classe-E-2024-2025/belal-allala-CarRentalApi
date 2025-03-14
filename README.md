@@ -34,7 +34,7 @@ Car Rental API est une API REST développée avec Laravel pour gérer un service
 
 1. **Cloner le dépôt** :
    ```bash
-   git clone https://github.com/votre-utilisateur/car-rental-api.git
+   git clone https://github.com/Youcode-Classe-E-2024-2025/belal-allala-CarRentalApi.git
    cd car-rental-api
    ```
 
