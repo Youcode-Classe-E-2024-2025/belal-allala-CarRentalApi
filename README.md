@@ -158,6 +158,6 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 🙏 Remerciements
 
-- [Laravel](https://laravel.com) pour le framework.
+
 
 
