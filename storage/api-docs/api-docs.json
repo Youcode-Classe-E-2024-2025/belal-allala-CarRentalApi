@@ -1,0 +1,931 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Car Rental API",
+        "description": "API for managing car rentals",
+        "contact": {
+            "email": "youremail@example.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Car Rental API Server"
+        }
+    ],
+    "paths": {
+        "/api/cars": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Get list of cars",
+                "description": "Returns list of cars",
+                "operationId": "getCarsList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Create a new car",
+                "description": "Creates a new car in the database",
+                "operationId": "createCar",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreCarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/cars/{id}": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Get car information",
+                "description": "Returns car data",
+                "operationId": "getCarById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Update existing car",
+                "description": "Updates an existing car in the database",
+                "operationId": "updateCar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Delete existing car",
+                "description": "Deletes an existing car in the database",
+                "operationId": "deleteCar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/payments": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Get list of payments",
+                "description": "Returns list of payments",
+                "operationId": "getPaymentsList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Create a new payment",
+                "description": "Creates a new payment in the database",
+                "operationId": "createPayment",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePaymentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/payments/{id}": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Get payment information",
+                "description": "Returns payment data",
+                "operationId": "getPaymentById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Payment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Update existing payment",
+                "description": "Updates an existing payment in the database",
+                "operationId": "updatePayment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Payment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePaymentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Delete existing payment",
+                "description": "Deletes an existing payment in the database",
+                "operationId": "deletePayment",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Payment id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/rentals": {
+            "get": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Get list of rentals",
+                "description": "Returns list of rentals",
+                "operationId": "getRentalsList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Create a new rental",
+                "description": "Creates a new rental in the database",
+                "operationId": "createRental",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreRentalRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/rentals/{id}": {
+            "get": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Get rental information",
+                "description": "Returns rental data",
+                "operationId": "getRentalById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Rental id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Update existing Rental",
+                "description": "Updates an existing Rental in the database",
+                "operationId": "updateRental",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Rental id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateRentalRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Rentals"
+                ],
+                "summary": "Delete existing Rental",
+                "description": "Deletes an existing Rental in the database",
+                "operationId": "deleteRental",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Rental id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreCarRequest": {
+                "title": "Store Car Request",
+                "description": "Store Car request body data",
+                "required": [
+                    "brand",
+                    "model",
+                    "year",
+                    "color",
+                    "registration_number",
+                    "mileage",
+                    "daily_rate"
+                ],
+                "properties": {
+                    "brand": {
+                        "title": "brand",
+                        "description": "Brand of the car",
+                        "type": "string",
+                        "example": "Renault"
+                    },
+                    "model": {
+                        "title": "model",
+                        "description": "Model of the car",
+                        "type": "string",
+                        "example": "Clio"
+                    },
+                    "year": {
+                        "title": "year",
+                        "description": "Year of the car",
+                        "type": "integer",
+                        "example": "2020"
+                    },
+                    "color": {
+                        "title": "color",
+                        "description": "Color of the car",
+                        "type": "string",
+                        "example": "Red"
+                    },
+                    "registration_number": {
+                        "title": "registration_number",
+                        "description": "Registration number of the car",
+                        "type": "string",
+                        "example": "AB-123-CD"
+                    },
+                    "mileage": {
+                        "title": "mileage",
+                        "description": "Mileage of the car",
+                        "type": "integer",
+                        "example": "50000"
+                    },
+                    "daily_rate": {
+                        "title": "daily_rate",
+                        "description": "Daily rate of the car",
+                        "type": "number",
+                        "format": "float",
+                        "example": "50.00"
+                    },
+                    "availability": {
+                        "title": "availability",
+                        "description": "Availability of the car",
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "image_path": {
+                        "title": "image_path",
+                        "description": "Image path of the car",
+                        "type": "string",
+                        "example": "cars/clio.jpg"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePaymentRequest": {
+                "title": "Store Payment Request",
+                "description": "Store Payment request body data",
+                "required": [
+                    "rental_id",
+                    "payment_date",
+                    "amount",
+                    "payment_method"
+                ],
+                "properties": {
+                    "rental_id": {
+                        "title": "rental_id",
+                        "description": "Rental ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "payment_date": {
+                        "title": "payment_date",
+                        "description": "Payment date",
+                        "type": "string",
+                        "example": "2025-03-18"
+                    },
+                    "amount": {
+                        "title": "amount",
+                        "description": "Payment amount",
+                        "type": "number",
+                        "format": "float",
+                        "example": 250
+                    },
+                    "payment_method": {
+                        "title": "payment_method",
+                        "description": "Payment method",
+                        "type": "string",
+                        "enum": [
+                            "credit_card",
+                            "paypal",
+                            "cash"
+                        ],
+                        "example": "credit_card"
+                    },
+                    "transaction_id": {
+                        "title": "transaction_id",
+                        "description": "Transaction ID",
+                        "type": "string",
+                        "example": "TX123456789"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreRentalRequest": {
+                "title": "Store Rental Request",
+                "description": "Store Rental request body data",
+                "required": [
+                    "user_id",
+                    "car_id",
+                    "start_date",
+                    "end_date",
+                    "rental_rate",
+                    "total_amount"
+                ],
+                "properties": {
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "User ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "car_id": {
+                        "title": "car_id",
+                        "description": "Car ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "start_date": {
+                        "title": "start_date",
+                        "description": "Start date of the rental",
+                        "type": "string",
+                        "example": "2025-03-15"
+                    },
+                    "end_date": {
+                        "title": "end_date",
+                        "description": "End date of the rental",
+                        "type": "string",
+                        "example": "2025-03-20"
+                    },
+                    "rental_rate": {
+                        "title": "rental_rate",
+                        "description": "Rental rate per day",
+                        "type": "number",
+                        "format": "float",
+                        "example": 50
+                    },
+                    "total_amount": {
+                        "title": "total_amount",
+                        "description": "Total amount of the rental",
+                        "type": "number",
+                        "format": "float",
+                        "example": 250
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status of the rental",
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "active",
+                            "completed",
+                            "cancelled"
+                        ],
+                        "example": "active"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCarRequest": {
+                "title": "Update Car Request",
+                "description": "Update Car request body data",
+                "properties": {
+                    "brand": {
+                        "title": "brand",
+                        "description": "Brand of the car",
+                        "type": "string",
+                        "example": "Renault"
+                    },
+                    "model": {
+                        "title": "model",
+                        "description": "Model of the car",
+                        "type": "string",
+                        "example": "Clio"
+                    },
+                    "year": {
+                        "title": "year",
+                        "description": "Year of the car",
+                        "type": "integer",
+                        "example": "2020"
+                    },
+                    "color": {
+                        "title": "color",
+                        "description": "Color of the car",
+                        "type": "string",
+                        "example": "Red"
+                    },
+                    "registration_number": {
+                        "title": "registration_number",
+                        "description": "Registration number of the car",
+                        "type": "string",
+                        "example": "AB-123-CD"
+                    },
+                    "mileage": {
+                        "title": "mileage",
+                        "description": "Mileage of the car",
+                        "type": "integer",
+                        "example": "50000"
+                    },
+                    "daily_rate": {
+                        "title": "daily_rate",
+                        "description": "Daily rate of the car",
+                        "type": "number",
+                        "format": "float",
+                        "example": "50.00"
+                    },
+                    "availability": {
+                        "title": "availability",
+                        "description": "Availability of the car",
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "image_path": {
+                        "title": "image_path",
+                        "description": "Image path of the car",
+                        "type": "string",
+                        "example": "cars/clio.jpg"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePaymentRequest": {
+                "title": "Update Payment Request",
+                "description": "Update Payment request body data",
+                "properties": {
+                    "rental_id": {
+                        "title": "rental_id",
+                        "description": "Rental ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "payment_date": {
+                        "title": "payment_date",
+                        "description": "Payment date",
+                        "type": "string",
+                        "example": "2025-03-18"
+                    },
+                    "amount": {
+                        "title": "amount",
+                        "description": "Payment amount",
+                        "type": "number",
+                        "format": "float",
+                        "example": 250
+                    },
+                    "payment_method": {
+                        "title": "payment_method",
+                        "description": "Payment method",
+                        "type": "string",
+                        "enum": [
+                            "credit_card",
+                            "paypal",
+                            "cash"
+                        ],
+                        "example": "credit_card"
+                    },
+                    "transaction_id": {
+                        "title": "transaction_id",
+                        "description": "Transaction ID",
+                        "type": "string",
+                        "example": "TX123456789"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateRentalRequest": {
+                "title": "Update Rental Request",
+                "description": "Update Rental request body data",
+                "properties": {
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "User ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "car_id": {
+                        "title": "car_id",
+                        "description": "Car ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "start_date": {
+                        "title": "start_date",
+                        "description": "Start date of the rental",
+                        "type": "string",
+                        "example": "2025-03-15"
+                    },
+                    "end_date": {
+                        "title": "end_date",
+                        "description": "End date of the rental",
+                        "type": "string",
+                        "example": "2025-03-20"
+                    },
+                    "rental_rate": {
+                        "title": "rental_rate",
+                        "description": "Rental rate per day",
+                        "type": "number",
+                        "format": "float",
+                        "example": 50
+                    },
+                    "total_amount": {
+                        "title": "total_amount",
+                        "description": "Total amount of the rental",
+                        "type": "number",
+                        "format": "float",
+                        "example": 250
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status of the rental",
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "active",
+                            "completed",
+                            "cancelled"
+                        ],
+                        "example": "active"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cars",
+            "description": "Operations related to cars"
+        },
+        {
+            "name": "Payments",
+            "description": "Operations related to payments"
+        },
+        {
+            "name": "Rentals",
+            "description": "Operations related to rentals"
+        }
+    ]
+}
