@@ -160,4 +160,4 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 - [Laravel](https://laravel.com) pour le framework.
 - [Stripe](https://stripe.com) pour l'intégration des paiements.
-- [Swagger](https://swagger.io) pour la documentation API.
+
